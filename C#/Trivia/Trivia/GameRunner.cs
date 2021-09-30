@@ -14,18 +14,17 @@ namespace Trivia
             aGame.Add("Pat");
             aGame.Add("Sue");
 
-            var rand = new Random();
+            new GameRunner().Run(aGame, new Random());
+        }
 
-            do
-            {
-                aGame.Roll(rand.Next(5) + 1);
+        public void Run(Game aGame, Random random) {
+            do {
+                aGame.Roll(random.Next(5) + 1);
 
-                if (rand.Next(9) == 7)
-                {
+                if (random.Next(9) == 7) {
                     _notAWinner = aGame.WrongAnswer();
                 }
-                else
-                {
+                else {
                     _notAWinner = aGame.WasCorrectlyAnswered();
                 }
             } while (_notAWinner);
