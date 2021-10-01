@@ -13,19 +13,19 @@ namespace Trivia.Tests
         public void check_game_runner_console_output() {
             string gameOutput = null;
 
-            using (var sw = new StringWriter()) {
-                Console.SetOut(sw);
+            using (var stringWriter = new StringWriter()) {
+                Console.SetOut(stringWriter);
                 
-                var aGame = new Game();
-                aGame.Add("Chet");
-                aGame.Add("Pat");
-                aGame.Add("Sue");
-                var game = new GameRunner();
+                var aGivenGame = new Game();
+                aGivenGame.Add("Chet");
+                aGivenGame.Add("Pat");
+                aGivenGame.Add("Sue");
+                var gameRunner = new GameRunner();
 
-                game.Run(aGame, new RandomTestable());
+                gameRunner.Run(aGivenGame, new RandomTestable());
 
-                gameOutput = sw.ToString();
-                sw.Flush();
+                gameOutput = stringWriter.ToString();
+                stringWriter.Flush();
             }
 
             Approvals.Verify(gameOutput);
