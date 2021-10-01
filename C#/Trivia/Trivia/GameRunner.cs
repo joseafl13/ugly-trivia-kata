@@ -9,7 +9,6 @@ namespace Trivia
         public static void Main(string[] args)
         {
             var aGame = new Game();
-
             aGame.Add("Chet");
             aGame.Add("Pat");
             aGame.Add("Sue");
@@ -20,13 +19,7 @@ namespace Trivia
         public void Run(Game aGame, Random random) {
             do {
                 aGame.Roll(random.Next(5) + 1);
-
-                if (random.Next(9) == 7) {
-                    _notAWinner = aGame.WrongAnswer();
-                }
-                else {
-                    _notAWinner = aGame.WasCorrectlyAnswered();
-                }
+                _notAWinner = random.Next(9) == 7 ? aGame.WrongAnswer() : aGame.WasCorrectlyAnswered();
             } while (_notAWinner);
         }
     }

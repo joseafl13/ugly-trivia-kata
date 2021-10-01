@@ -12,15 +12,17 @@ namespace Trivia.Tests
         [Fact]
         public void check_game_runner_console_output() {
             string gameOutput = null;
+
             using (var sw = new StringWriter()) {
                 Console.SetOut(sw);
+                
                 var aGame = new Game();
                 aGame.Add("Chet");
                 aGame.Add("Pat");
                 aGame.Add("Sue");
                 var game = new GameRunner();
 
-                game.Run(aGame, new RandomMock());
+                game.Run(aGame, new RandomTestable());
 
                 gameOutput = sw.ToString();
                 sw.Flush();
@@ -29,7 +31,7 @@ namespace Trivia.Tests
             Approvals.Verify(gameOutput);
         }
 
-        public class RandomMock : Random
+        public class RandomTestable : Random
         {
             public override int Next(int maxValue) {
                 return 2;
